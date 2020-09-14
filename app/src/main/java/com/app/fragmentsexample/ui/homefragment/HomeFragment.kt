@@ -2,6 +2,7 @@ package com.app.fragmentsexample.ui.homefragment
 
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import com.app.fragmentsexample.R
 import kotlinx.android.synthetic.main.fragment_container.*
+import java.lang.StringBuilder
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -33,6 +35,19 @@ class HomeFragment : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+
+        childFragmentManager.addOnBackStackChangedListener {
+            val message = StringBuilder("BackStackCount is = ${childFragmentManager.backStackEntryCount}")
+
+            for (index in childFragmentManager.backStackEntryCount - 1 downTo 0) {
+                val backStackEntryAt = childFragmentManager.getBackStackEntryAt(index)
+                message.append("${backStackEntryAt.name}\n")
+            }
+
+            Log.d("COMMON", message.toString())
+
+        }
+
     }
 
     override fun onCreateView(
@@ -82,5 +97,7 @@ class HomeFragment : Fragment() {
                 )
             }
         }
+
+        //Log.d("COMMON", "child fragments number = ${childFragmentManager.backStackEntryCount}")
     }
 }

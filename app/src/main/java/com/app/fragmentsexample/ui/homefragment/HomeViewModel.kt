@@ -1,5 +1,6 @@
 package com.app.fragmentsexample.ui.homefragment
 
+import android.util.Log
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModel
 import com.app.fragmentsexample.R
@@ -17,5 +18,6 @@ class HomeViewModel : ViewModel() {
             .replace(R.id.container_fragment, ChildFragment.newInstance(childText))
             .addToBackStack(childText).commit()
 
+        Log.d("COMMON", "child fragments number = ${childFragmentManager.backStackEntryCount}")
     }
 }
